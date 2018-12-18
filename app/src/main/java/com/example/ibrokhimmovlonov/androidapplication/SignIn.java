@@ -1,6 +1,7 @@
 package com.example.ibrokhimmovlonov.androidapplication;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.ibrokhimmovlonov.androidapplication.Common.Common;
 import com.example.ibrokhimmovlonov.androidapplication.Model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -55,6 +57,12 @@ public class SignIn extends AppCompatActivity {
                             User user = dataSnapshot.child(editPhone.getText().toString()).getValue(User.class);
                             if (user.getPassword().equals(editPassword.getText().toString())) {
                                 Toast.makeText(SignIn.this, "Sign in successfully !", Toast.LENGTH_SHORT).show();
+
+                                Intent homeIntent = new Intent(SignIn.this, Home.class);
+                                Common.currentUser = user;
+                                startActivity(homeIntent);
+                                finish();
+
                             } else {
                                 Toast.makeText(SignIn.this, "Wrong password !!!", Toast.LENGTH_SHORT).show();
                             }
