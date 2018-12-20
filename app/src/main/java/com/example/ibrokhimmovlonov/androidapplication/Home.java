@@ -1,10 +1,12 @@
 package com.example.ibrokhimmovlonov.androidapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -37,6 +39,8 @@ public class Home extends AppCompatActivity
     RecyclerView recyler_menu;
     RecyclerView.LayoutManager layoutManager;
 
+    FirebaseRecyclerAdapter<Category,MenuViewHolder> adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,8 +60,8 @@ public class Home extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent cartintent = new Intent(Home.this, Cart.class);
+                startActivity(cartintent);
             }
         });
 
@@ -87,7 +91,8 @@ public class Home extends AppCompatActivity
     }
 
     private void loadMenu() {
-        FirebaseRecyclerAdapter<Category,MenuViewHolder> adapter = new FirebaseRecyclerAdapter<Category, MenuViewHolder>(Category.class, R.layout.menu_item,MenuViewHolder.class,category) {
+
+         adapter = new FirebaseRecyclerAdapter<Category, MenuViewHolder>(Category.class, R.layout.menu_item,MenuViewHolder.class,category) {
             @Override
             protected void populateViewHolder(MenuViewHolder viewHolder, Category model, int position) {
                 viewHolder.txtMenuName.setText(model.getName());
@@ -96,7 +101,15 @@ public class Home extends AppCompatActivity
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                        Toast.makeText(Home.this, ""+clickItem.getName(), Toast.LENGTH_SHORT).show();
+
+                        // Get CategoryID and send to new Activity
+                        Intent foodlist = new Intent(Home.this, FoodList.class);
+                        // Because CategoryID is key, so we just get key of this item
+                        foodlist.putExtra("CategoryId",adapter.getRef(position).getKey());
+                        startActivity(foodlist);
+
+                        Log.d("CHECk", "CHECKING ");
+
                     }
                 });
 
