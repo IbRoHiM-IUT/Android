@@ -80,6 +80,7 @@ public class Home extends AppCompatActivity
         fullName = headerView.findViewById(R.id.txtFullName);
         fullName.setText(Common.currentUser.getName());
 
+
         // Load menu
         recyler_menu = findViewById(R.id.recycler_menu);
         recyler_menu.setHasFixedSize(true);
@@ -108,7 +109,7 @@ public class Home extends AppCompatActivity
                         foodlist.putExtra("CategoryId",adapter.getRef(position).getKey());
                         startActivity(foodlist);
 
-                        Log.d("CHECk", "CHECKING ");
+                        Log.d("CHECK", "CHECKING ");
 
                     }
                 });
@@ -149,12 +150,26 @@ public class Home extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_menu) {
-            // Handle the camera action
-        } else if (id == R.id.nav_cart) {
+            Intent menu = new Intent(Home.this, Home.class);
+            startActivity(menu);
 
-        } else if (id == R.id.nav_orders) {
+        }
+        else if (id == R.id.nav_fav) {
+
+
+        }else if (id == R.id.nav_cart) {
+            Intent cartIntent = new Intent(Home.this,Cart.class);
+            startActivity(cartIntent);
+
+        } else if (id == R.id.nav_profile) {
+            Intent profileIntent = new Intent(Home.this,Profile.class);
+            startActivity(profileIntent);
 
         } else if (id == R.id.nav_log_out) {
+            // Logout
+            Intent signIn = new Intent(Home.this, SignIn.class);
+            signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(signIn);
 
         }
 

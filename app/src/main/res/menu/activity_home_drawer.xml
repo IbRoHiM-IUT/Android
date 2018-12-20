@@ -10,15 +10,20 @@
             android:iconTint="@android:color/white"
             android:title="Menu" />
         <item
+            android:id="@+id/nav_fav"
+            android:icon="@drawable/ic_favorite_black_24dp"
+            android:iconTint="@android:color/white"
+            android:title="Favorites" />
+        <item
             android:id="@+id/nav_cart"
             android:icon="@drawable/ic_shopping_cart_black_24dp"
             android:iconTint="@android:color/white"
             android:title="Cart" />
         <item
-            android:id="@+id/nav_orders"
-            android:icon="@drawable/ic_access_time_black_24dp"
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_person_black_24dp"
             android:iconTint="@android:color/white"
-            android:title="Orders" />
+            android:title="Profile" />
         <item
             android:id="@+id/nav_log_out"
             android:icon="@drawable/ic_exit_to_app_black_24dp"
