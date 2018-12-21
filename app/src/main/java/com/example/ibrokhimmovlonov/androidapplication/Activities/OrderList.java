@@ -1,4 +1,4 @@
-package com.example.ibrokhimmovlonov.androidapplication;
+package com.example.ibrokhimmovlonov.androidapplication.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,12 +8,13 @@ import android.util.Log;
 
 import com.example.ibrokhimmovlonov.androidapplication.Common.Common;
 import com.example.ibrokhimmovlonov.androidapplication.Model.Request;
+import com.example.ibrokhimmovlonov.androidapplication.R;
 import com.example.ibrokhimmovlonov.androidapplication.ViewHolder.OrderViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class OrderStatus extends AppCompatActivity {
+public class OrderList extends AppCompatActivity {
 
     public RecyclerView recyclerView;
     public RecyclerView.LayoutManager layoutManager;
@@ -68,11 +69,11 @@ public class OrderStatus extends AppCompatActivity {
         Log.d("CHECK", "on convertCode ");
 
         if (status.equals("0"))
-            return "Placed";
+            return "PUT";
         else if (status.equals("1"))
             return "On my way";
         else
-            return "Shipped";
+            return "DELIVERED";
 
     }
 }

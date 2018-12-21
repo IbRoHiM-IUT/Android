@@ -1,10 +1,15 @@
-package com.example.ibrokhimmovlonov.androidapplication;
+package com.example.ibrokhimmovlonov.androidapplication.Activities;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -12,6 +17,7 @@ import android.widget.Toast;
 import com.example.ibrokhimmovlonov.androidapplication.Database.Database;
 import com.example.ibrokhimmovlonov.androidapplication.Interface.ItemClickListener;
 import com.example.ibrokhimmovlonov.androidapplication.Model.Food;
+import com.example.ibrokhimmovlonov.androidapplication.R;
 import com.example.ibrokhimmovlonov.androidapplication.ViewHolder.FoodViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -24,7 +30,7 @@ public class FoodList extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
 
     FirebaseDatabase database;
-    DatabaseReference foodlist;
+    DatabaseReference foodlist, favoriteList;
 
     String categoryId="";
 
@@ -37,9 +43,12 @@ public class FoodList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_list);
 
+
         //Init Firebase
         database = FirebaseDatabase.getInstance();
         foodlist = database.getReference("Foods");
+        favoriteList = database.getReference("Favorites");
+
 
         //Local DB
         localDB = new Database(this);
@@ -93,6 +102,8 @@ public class FoodList extends AppCompatActivity {
                             localDB.addInfoToFavorites(adapter.getRef(position).getKey());
                             viewHolder.fav_image.setImageResource(R.drawable.ic_favorite_black_24dp);
                             Toast.makeText(FoodList.this, ""+model.getName()+" was added to Favorites", Toast.LENGTH_SHORT).show();
+
+                            //favoriteList.child(Common.currentUser.getName()).setValue(adapter.getRef(position));
 
                         }
                         else {

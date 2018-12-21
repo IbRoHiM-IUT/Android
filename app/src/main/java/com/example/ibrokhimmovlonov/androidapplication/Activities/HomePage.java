@@ -1,9 +1,8 @@
-package com.example.ibrokhimmovlonov.androidapplication;
+package com.example.ibrokhimmovlonov.androidapplication.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,18 +16,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.ibrokhimmovlonov.androidapplication.Common.Common;
 import com.example.ibrokhimmovlonov.androidapplication.Interface.ItemClickListener;
-import com.example.ibrokhimmovlonov.androidapplication.Model.Category;
+import com.example.ibrokhimmovlonov.androidapplication.Model.Type;
+import com.example.ibrokhimmovlonov.androidapplication.R;
 import com.example.ibrokhimmovlonov.androidapplication.ViewHolder.MenuViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
-public class Home extends AppCompatActivity
+public class HomePage extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     FirebaseDatabase database;
@@ -39,7 +38,7 @@ public class Home extends AppCompatActivity
     RecyclerView recyler_menu;
     RecyclerView.LayoutManager layoutManager;
 
-    FirebaseRecyclerAdapter<Category,MenuViewHolder> adapter;
+    FirebaseRecyclerAdapter<Type,MenuViewHolder> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +59,7 @@ public class Home extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent cartintent = new Intent(Home.this, Cart.class);
+                Intent cartintent = new Intent(HomePage.this, CartOrder.class);
                 startActivity(cartintent);
             }
         });
@@ -86,25 +85,25 @@ public class Home extends AppCompatActivity
         recyler_menu.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyler_menu.setLayoutManager(layoutManager);
-        
+//        Log.d("MYTAG", "HomePage "+ Common.currentUser.getName());
         loadMenu();
 
     }
 
     private void loadMenu() {
 
-         adapter = new FirebaseRecyclerAdapter<Category, MenuViewHolder>(Category.class, R.layout.menu_item,MenuViewHolder.class,category) {
+         adapter = new FirebaseRecyclerAdapter<Type, MenuViewHolder>(Type.class, R.layout.menu_item,MenuViewHolder.class,category) {
             @Override
-            protected void populateViewHolder(MenuViewHolder viewHolder, Category model, int position) {
+            protected void populateViewHolder(MenuViewHolder viewHolder, Type model, int position) {
                 viewHolder.txtMenuName.setText(model.getName());
                 Picasso.with(getBaseContext()).load(model.getImage()).into(viewHolder.imageView);
-                final Category clickItem = model;
+                final Type clickItem = model;
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
 
                         // Get CategoryID and send to new Activity
-                        Intent foodlist = new Intent(Home.this, FoodList.class);
+                        Intent foodlist = new Intent(HomePage.this, FoodList.class);
                         // Because CategoryID is key, so we just get key of this item
                         foodlist.putExtra("CategoryId",adapter.getRef(position).getKey());
                         startActivity(foodlist);
@@ -150,7 +149,7 @@ public class Home extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_menu) {
-            Intent menu = new Intent(Home.this, Home.class);
+            Intent menu = new Intent(HomePage.this, HomePage.class);
             startActivity(menu);
 
         }
@@ -158,16 +157,16 @@ public class Home extends AppCompatActivity
 
 
         }else if (id == R.id.nav_cart) {
-            Intent cartIntent = new Intent(Home.this,Cart.class);
+            Intent cartIntent = new Intent(HomePage.this,CartOrder.class);
             startActivity(cartIntent);
 
         } else if (id == R.id.nav_profile) {
-            Intent profileIntent = new Intent(Home.this,Profile.class);
+            Intent profileIntent = new Intent(HomePage.this,Profile.class);
             startActivity(profileIntent);
 
         } else if (id == R.id.nav_log_out) {
             // Logout
-            Intent signIn = new Intent(Home.this, SignIn.class);
+            Intent signIn = new Intent(HomePage.this, MainActivity.class);
             signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(signIn);
 

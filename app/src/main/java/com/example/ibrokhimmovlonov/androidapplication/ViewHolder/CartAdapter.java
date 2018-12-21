@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
-import com.example.ibrokhimmovlonov.androidapplication.Cart;
 import com.example.ibrokhimmovlonov.androidapplication.Interface.ItemClickListener;
 import com.example.ibrokhimmovlonov.androidapplication.Model.Order;
 import com.example.ibrokhimmovlonov.androidapplication.R;

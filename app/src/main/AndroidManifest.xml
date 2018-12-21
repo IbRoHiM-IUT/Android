@@ -11,24 +11,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignIn" />
-        <activity android:name=".SignUp" />
+        <activity android:name=".Activities.SignIn" />
+        <activity android:name=".Activities.SignUp" />
         <activity
-            android:name=".Home"
+            android:name=".Activities.HomePage"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme" />
-        <activity android:name=".FoodList" />
-        <activity android:name=".FoodInfo" />
-        <activity android:name=".Cart" />
-        <activity android:name=".OrderStatus" />
-        <activity android:name=".Profile"></activity>
+        <activity android:name=".Activities.FoodList" />
+        <activity android:name=".Activities.FoodInfo" />
+        <activity android:name=".Activities.CartOrder" />
+        <activity android:name=".Activities.OrderList" />
+        <activity android:name=".Activities.Profile" />
+        <activity android:name=".Activities.Favorities"></activity>
     </application>
 
 </manifest>

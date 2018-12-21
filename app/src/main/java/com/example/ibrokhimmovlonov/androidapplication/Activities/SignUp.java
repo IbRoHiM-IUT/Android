@@ -1,4 +1,4 @@
-package com.example.ibrokhimmovlonov.androidapplication;
+package com.example.ibrokhimmovlonov.androidapplication.Activities;
 
 import android.app.ProgressDialog;
 import android.support.annotation.NonNull;
@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.ibrokhimmovlonov.androidapplication.Model.User;
+import com.example.ibrokhimmovlonov.androidapplication.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

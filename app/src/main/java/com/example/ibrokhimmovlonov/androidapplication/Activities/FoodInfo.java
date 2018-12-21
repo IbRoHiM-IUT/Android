@@ -1,12 +1,10 @@
-package com.example.ibrokhimmovlonov.androidapplication;
+package com.example.ibrokhimmovlonov.androidapplication.Activities;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,6 +14,7 @@ import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.example.ibrokhimmovlonov.androidapplication.Database.Database;
 import com.example.ibrokhimmovlonov.androidapplication.Model.Food;
 import com.example.ibrokhimmovlonov.androidapplication.Model.Order;
+import com.example.ibrokhimmovlonov.androidapplication.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -60,7 +59,7 @@ public class FoodInfo extends AppCompatActivity {
                         current_food.getPrice(),
                         current_food.getDiscount()
                 ));
-                Toast.makeText(FoodInfo.this, "Added to Cart", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FoodInfo.this, "Added to CartOrder", Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -1,13 +1,13 @@
 package com.example.ibrokhimmovlonov.androidapplication.Model;
 
-public class Category {
+public class Type {
     private String Name;
     private String Image;
 
-    public Category() {
+    public Type() {
     }
 
-    public Category(String name, String image) {
+    public Type(String name, String image) {
         Name = name;
         Image = image;
     }

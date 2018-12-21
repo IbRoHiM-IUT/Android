@@ -1,7 +1,6 @@
-package com.example.ibrokhimmovlonov.androidapplication;
+package com.example.ibrokhimmovlonov.androidapplication.Activities;
 
 import android.content.Intent;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,10 +8,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.ibrokhimmovlonov.androidapplication.Common.Common;
+import com.example.ibrokhimmovlonov.androidapplication.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import butterknife.OnClick;
 
 public class Profile extends AppCompatActivity {
 
@@ -34,7 +32,7 @@ public class Profile extends AppCompatActivity {
         btn_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent orderIntent = new Intent(Profile.this,OrderStatus.class);
+                Intent orderIntent = new Intent(Profile.this,OrderList.class);
                 startActivity(orderIntent);
             }
         });

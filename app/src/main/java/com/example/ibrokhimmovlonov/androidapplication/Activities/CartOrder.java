@@ -1,4 +1,4 @@
-package com.example.ibrokhimmovlonov.androidapplication;
+package com.example.ibrokhimmovlonov.androidapplication.Activities;
 
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
@@ -17,6 +17,7 @@ import com.example.ibrokhimmovlonov.androidapplication.Common.Common;
 import com.example.ibrokhimmovlonov.androidapplication.Database.Database;
 import com.example.ibrokhimmovlonov.androidapplication.Model.Order;
 import com.example.ibrokhimmovlonov.androidapplication.Model.Request;
+import com.example.ibrokhimmovlonov.androidapplication.R;
 import com.example.ibrokhimmovlonov.androidapplication.ViewHolder.CartAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -26,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class Cart extends AppCompatActivity {
+public class CartOrder extends AppCompatActivity {
 
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
@@ -83,11 +84,11 @@ public class Cart extends AppCompatActivity {
     }
 
     private void showalertDialog() {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(Cart.this);
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(CartOrder.this);
         alertDialog.setTitle("One more step!");
         alertDialog.setMessage("Enter your address: ");
 
-        final EditText edtAddress = new EditText(Cart.this);
+        final EditText edtAddress = new EditText(CartOrder.this);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT
@@ -115,7 +116,7 @@ public class Cart extends AppCompatActivity {
 
                 // Delete cart
                 new Database(getBaseContext()).cleanCart();
-                Toast.makeText(Cart.this, "Thank you , Order Place", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CartOrder.this, "Thank you , Order Place", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
