@@ -32,11 +32,11 @@ public class Database extends SQLiteAssetHelper {
         sqLiteQueryBuilder.setTables(sqlTABLE);
         Cursor cursor = sqLiteQueryBuilder.query(database, sqlSELECT, null, null, null, null,null);
 
-        final List<Order> result = new ArrayList<>();
+        final List<Order> resultList = new ArrayList<>();
         if (cursor.moveToFirst()) {
 
             do {
-                result.add(new Order(cursor.getString(cursor.getColumnIndex("ProductId")),
+                resultList.add(new Order(cursor.getString(cursor.getColumnIndex("ProductId")),
                         cursor.getString(cursor.getColumnIndex("ProductName")),
                         cursor.getString(cursor.getColumnIndex("Quantity")),
                         cursor.getString(cursor.getColumnIndex("Price")),
@@ -46,7 +46,7 @@ public class Database extends SQLiteAssetHelper {
             }while (cursor.moveToNext());
 
         }
-        return result;
+        return resultList;
 
     }
 

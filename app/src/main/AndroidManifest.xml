@@ -29,7 +29,10 @@
         <activity android:name=".Activities.CartOrder" />
         <activity android:name=".Activities.OrderList" />
         <activity android:name=".Activities.Profile" />
-        <activity android:name=".Activities.Favorities"></activity>
+        <activity android:name=".Activities.Favorities" />
+        <activity android:name=".Admin.AdminSide" />
+        <activity android:name=".Admin.AdminOrderHistory" />
+        <activity android:name=".Admin.AdminAddFood"></activity>
     </application>
 
 </manifest>

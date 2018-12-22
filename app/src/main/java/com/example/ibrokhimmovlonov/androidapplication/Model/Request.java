@@ -8,18 +8,18 @@ public class Request {
     private String address;
     private String total;
     private String status;
-    private List<Order> foods;              // list of food order
+    private List<Order> foodList;                      // list of Food orders
 
     public Request() {
     }
 
-    public Request(String phone, String name, String address, String total, List<Order> foods) {
+    public Request(String phone, String name, String address, String total, List<Order> foodList) {
         this.phone = phone;
         this.name = name;
         this.address = address;
         this.total = total;
-        this.foods = foods;
-        this.status = "0";          // default is 0,      0: Placed ,   1: Shipping,    2: Shipped
+        this.foodList = foodList;
+        this.status = "0";
 
     }
 
@@ -64,10 +64,10 @@ public class Request {
     }
 
     public List<Order> getFoods() {
-        return foods;
+        return foodList;
     }
 
-    public void setFoods(List<Order> foods) {
-        this.foods = foods;
+    public void setFoods(List<Order> foodList) {
+        this.foodList = foodList;
     }
 }

@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.ibrokhimmovlonov.androidapplication.Admin.AdminSide;
 import com.example.ibrokhimmovlonov.androidapplication.Common.Common;
 import com.example.ibrokhimmovlonov.androidapplication.Model.User;
 import com.example.ibrokhimmovlonov.androidapplication.R;
@@ -23,6 +25,10 @@ public class SignIn extends AppCompatActivity {
 
     MaterialEditText editPhone, editPassword;
 
+    FirebaseDatabase database;
+
+    DatabaseReference table_user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,54 +40,73 @@ public class SignIn extends AppCompatActivity {
         editPassword = (MaterialEditText) findViewById(R.id.editPassword);
 
         // Init Firebase
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference table_user = database.getReference("User");
+        database = FirebaseDatabase.getInstance();
+        table_user = database.getReference("User");
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                final ProgressDialog mDialog = new ProgressDialog(SignIn.this);
-                mDialog.setMessage("Please waiting...");
-                mDialog.show();
+                if (!editPhone.getText().toString().isEmpty() && !editPassword.getText().toString().isEmpty()) {
 
-                table_user.addValueEventListener(new ValueEventListener() {
+                    final ProgressDialog mDialog = new ProgressDialog(SignIn.this);
+                    mDialog.setMessage("Please waiting...");
+                    mDialog.show();
+
+                    table_user.addValueEventListener(new ValueEventListener() {
+
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                            Log.d("TAG", "on tableuser");
+
+                            // Check if user not exist in database
+                            if (dataSnapshot.child(editPhone.getText().toString()).exists()) {
+                                //Get User information
+                                mDialog.dismiss();
+                                User user = dataSnapshot.child(editPhone.getText().toString()).getValue(User.class);
+//                                user.setPhone(editPhone.getText().toString());
 
 
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if (user.getPassword().equals(editPassword.getText().toString())) {
+                                    Log.d("MYTAG", user.getType());
+                                    if (user.getType().equals("1")) {
+                                        //Log.d("MYTAG", "WELCOME TO ADMIN PAGE");
+                                    Toast.makeText(SignIn.this, "Welcome to admin page", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(SignIn.this, AdminSide.class);
+                                    Common.currentUser = user;
+                                    startActivity(intent);
+                                    finish();
 
-                        // Check if user not exist in database
-                        if (dataSnapshot.child(editPhone.getText().toString()).exists()) {
-                            //Get User information
-                            mDialog.dismiss();
-                            User user = dataSnapshot.child(editPhone.getText().toString()).getValue(User.class);
-                            user.setPhone(editPhone.getText().toString());          // set phone
-
-                            if (user.getPassword().equals(editPassword.getText().toString())) {
-                                Toast.makeText(SignIn.this, "Sign in successfully !", Toast.LENGTH_SHORT).show();
-                                Intent homeIntent = new Intent(SignIn.this, HomePage.class);
-                                Common.currentUser = user;
-                                startActivity(homeIntent);
-                                finish();
+                                    } else {
+                                        Intent intent = new Intent(SignIn.this, HomePage.class);
+                                        Common.currentUser = user;
+                                        startActivity(intent);
+                                      //  Log.d("MYTAG", "WELCOME TO USER PAGE");
+                                        finish();
+                                    }
+                                } else {
+                                    Toast.makeText(SignIn.this, "Wrong password !!!", Toast.LENGTH_SHORT).show();
+                                }
 
                             } else {
-                                Toast.makeText(SignIn.this, "Wrong password !!!", Toast.LENGTH_SHORT).show();
+                                mDialog.dismiss();
+                                Toast.makeText(SignIn.this, "User not exist in Database", Toast.LENGTH_SHORT).show();
                             }
-                        }
-                        else {
-                            mDialog.dismiss();
-                            Toast.makeText(SignIn.this, "User not exist in Database", Toast.LENGTH_SHORT).show();
+
                         }
 
-                    }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        }
+                    });
+                } else {
+                    Toast.makeText(SignIn.this, "All fields must be required", Toast.LENGTH_SHORT).show();
 
-                    }
-                });
+                }
             }
         });
+
     }
 }
